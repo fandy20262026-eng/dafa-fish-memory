@@ -82,7 +82,7 @@ setx MEMORY_API_KEY "sk-你的密钥"
 ```
 
 插件支持 `${环境变量名}` 语法，也会直接读 `process.env.MEMORY_API_KEY`。
-（历史变量名 `SILICONFLOW_API_KEY` 仍然兼容，老配置不用改。）
+（更名前的旧变量名仍然兼容，老配置不用改。）
 **如果 key 没配好，插件不会崩，而是降级为「只存不搜」**，`memory_doctor` 会告诉你要修什么。
 
 常用配置：
