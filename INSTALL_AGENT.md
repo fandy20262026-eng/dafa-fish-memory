@@ -21,14 +21,15 @@ DSH 版本不符合就先升级 DSH，不要硬装。
 对用户说：
 
 > 这个插件需要一个 embedding 服务的 API key 才能工作。
-> 免费方案：注册 https://cloud.siliconflow.cn/ ，实名后创建密钥（`sk-` 开头）。
-> 请把 key 给我，或者你自己设成环境变量 `SILICONFLOW_API_KEY`。
+> 需要的是 `BAAI/bge-m3`（1024 维）与 `BAAI/bge-reranker-v2-m3` 两模型，任何兼容 OpenAI 接口的服务都行，
+> 国内几个平台都有免费额度（多数要实名）。插件不绑定服务商，只要把 `apiBase` 指对。
+> 请把 key 给我，或者你自己设成环境变量 `MEMORY_API_KEY`。
 
 **硬规则**：
 
 - ❌ 不要把 key 写进任何源码、README、提交记录
 - ❌ 不要把 key 明文贴进对话（让用户用环境变量，或者你直接写入配置文件后不要再回显）
-- ✅ 优先 `setx SILICONFLOW_API_KEY "sk-..."`（Windows）或写进插件配置的 `${SILICONFLOW_API_KEY}`
+- ✅ 优先 `setx MEMORY_API_KEY "sk-..."`（Windows）或写进插件配置的 `${MEMORY_API_KEY}`
 
 ### 2. 安装插件
 
@@ -52,7 +53,7 @@ dsh plugin --profile <profile 名> add github:fandy20262026-eng/dafa-fish-memory
 - id: dafa-fish-memory
   name: dafa-fish-memory
   config:
-    apiKey: ${SILICONFLOW_API_KEY}
+    apiKey: ${MEMORY_API_KEY}
 ```
 
 ### 4. 重启宿主

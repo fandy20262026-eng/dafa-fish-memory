@@ -98,9 +98,9 @@ console.log(`\n[4] doctor 输出（不探测）`)
 
 console.log(`\n[5] doctor 输出（探测真实接口）`)
 {
-  const realKey = (process.env.SILICONFLOW_API_KEY ?? '').trim()
+  const realKey = (process.env.MEMORY_API_KEY ?? process.env.SILICONFLOW_API_KEY ?? '').trim()
   if (realKey === '') {
-    console.log('  · 跳过（没有 SILICONFLOW_API_KEY）')
+    console.log('  · 跳过（没有 MEMORY_API_KEY）')
   } else {
     const realSettings = resolveSettings({ home: root, apiKey: '', embeddingDim: 1024 })
     const report = await buildDoctor({ settings: realSettings, store: db, startupError: null, state: {}, probe: true, })

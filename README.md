@@ -20,21 +20,18 @@
 
 ## 关键：你需要自己的 API key
 
-**这个仓库不包含任何密钥。** 你需要自己准备：
+**这个仓库不包含任何密钥。** 你需要一个能提供下面两种模型的 API —— 任何兼容 OpenAI 接口的服务都可以：
 
-| 用途 | 需要什么 | 免费吗 |
+| 用途 | 推荐模型 | 说明 |
 |---|---|---|
-| 向量化（把文字变成可检索的向量） | 一个 embedding 模型的 API | 硅基流动的 `BAAI/bge-m3` 免费 |
-| 重排（把「像」变成「对」） | 一个 reranker 模型的 API | 硅基流动的 `BAAI/bge-reranker-v2-m3` 免费 |
+| 向量化 | `BAAI/bge-m3`（1024 维） | 中文效果好、多语言，多数平台都有免费额度 |
+| 重排 | `BAAI/bge-reranker-v2-m3` | 把「像」变成「对」 |
 
-> **不要用付费档**：模型名以 `Pro/` 开头的会被插件**直接拒绝并回退**到免费版本。
-> 这样做是为了防止有人误把账单跑爆。
+> **不要用付费档**：模型名以 `Pro/` 开头的会被插件**直接拒绝并回退**到免费版本，防止误把账单跑爆。
 
-怎么拿到 key：
+各家拿 key 的流程大同小异（注册 → 控制台 → API 密钥 → 新建），格式通常是 `sk-` 开头。插件不绑定具体服务商，把你的 `apiBase` 指过去就行。
 
-1. 注册 [硅基流动](https://cloud.siliconflow.cn/)（需要实名认证才能用免费模型）
-2. 控制台 → API 密钥 → 新建密钥，复制 `sk-` 开头的字符串
-3. **不要写进代码，也不要提交到 git**，用环境变量或插件配置传给它
+**不要写进代码，也不要提交到 git**，用环境变量或插件配置传给它。
 
 ## 安装
 
@@ -72,7 +69,7 @@ dsh plugin --profile web add dafa-fish-memory
 
 ```powershell
 # Windows：设一次，之后所有会话都能读到
-setx SILICONFLOW_API_KEY "sk-你的密钥"
+setx MEMORY_API_KEY "sk-你的密钥"
 ```
 
 **方式 B：写进插件配置**（在 profile 的 `cordis.patch.yml` 里）
@@ -81,10 +78,11 @@ setx SILICONFLOW_API_KEY "sk-你的密钥"
 - id: dafa-fish-memory
   name: dafa-fish-memory
   config:
-    apiKey: ${SILICONFLOW_API_KEY}   # 插件会自己展开 ${...}
+    apiKey: ${MEMORY_API_KEY}   # 插件会自己展开 ${...}
 ```
 
-插件支持 `${环境变量名}` 语法，也会直接读 `process.env.SILICONFLOW_API_KEY`。
+插件支持 `${环境变量名}` 语法，也会直接读 `process.env.MEMORY_API_KEY`。
+（历史变量名 `SILICONFLOW_API_KEY` 仍然兼容，老配置不用改。）
 **如果 key 没配好，插件不会崩，而是降级为「只存不搜」**，`memory_doctor` 会告诉你要修什么。
 
 常用配置：
