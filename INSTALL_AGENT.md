@@ -32,12 +32,15 @@ DSH 版本不符合就先升级 DSH，不要硬装。
 
 ### 2. 安装插件
 
+**优先用 GitHub 直装**（仓库已公开，不需要 npm）：
+
 ```bash
-dsh plugin --profile <profile 名> add dafa-fish-memory
+dsh plugin --profile <profile 名> add github:fandy20262026-eng/dafa-fish-memory#v1.0.0
 ```
 
 - profile 名通常是 `web`（浏览器端）或 `desktop`（桌面端）。**先问用户用哪个，或者看他在跑哪个**。
-- 如果还没发布到 npm，用本地路径：`dsh plugin --profile web add link:<目录绝对路径>`
+- `#v1.0.0` 是版本锚点，建议带上，避免上游变动影响用户。
+- 如果用户想改代码，改用本地克隆 + `dsh plugin --profile web add link:<目录绝对路径>`。
 
 ### 3. 确认配置
 

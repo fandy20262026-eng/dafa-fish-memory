@@ -38,17 +38,31 @@
 
 ## 安装
 
+**方式一：从 GitHub 直装（推荐）**
+
+```bash
+dsh plugin --profile web add github:fandy20262026-eng/dafa-fish-memory#v1.0.0
+```
+
+末尾的 `#v1.0.0` 是版本锚点，保证装到固定版本、不会哪天被上游改动影响。
+想始终跟随最新代码，去掉 `#v1.0.0` 即可。
+
+**方式二：克隆后本地安装**
+
+```bash
+git clone https://github.com/fandy20262026-eng/dafa-fish-memory.git
+dsh plugin --profile web add link:<克隆下来的目录绝对路径>
+```
+
+适合要改代码、或想先看源码再装的人。
+
+**方式三：等它上 npm 之后**
+
 ```bash
 dsh plugin --profile web add dafa-fish-memory
 ```
 
-装完**重启 dsh**。
-
-如果还没发布到 npm，用本地路径安装：
-
-```bash
-dsh plugin --profile web add link:<本目录绝对路径>
-```
+装完**重启 dsh**。浏览器端记得 `Ctrl+Shift+R` 硬刷新一次。
 
 ## 配置
 
