@@ -1,0 +1,12 @@
+# ============================================================================
+# dafa-fish-memory —— DSH bundle patch
+# ============================================================================
+# 安装：
+#   dsh plugin --profile web add link:C:\Users\User\projects\dsh-plugin-src\dafa-fish-memory
+# 卸载：
+#   dsh plugin --profile web remove dafa-fish-memory
+# ============================================================================
+
+- insert:
+    - id: dafa-fish-memory
+      name: dafa-fish-memory

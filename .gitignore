@@ -1,0 +1,38 @@
+# 依赖
+node_modules/
+.pnp/
+.pnpm-store/
+
+# 运行时产物（绝不要提交）
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+diag.jsonl
+*.log
+memory.log
+
+# 本地记忆数据目录（如果你在插件目录里测试过）
+memory-sf/
+data/
+
+# 凭据：任何形式都不要进仓库
+.env
+.env.*
+*.key
+*credentials*
+*secret*
+config.local.*
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 备份文件
+*.bak
+*.bak-*
+*.orig

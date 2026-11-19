@@ -1,0 +1,51 @@
+{
+  "name": "dafa-fish-memory",
+  "version": "1.0.0",
+  "description": "大肥鱼记忆不止7秒 —— DSH 本地优先记忆插件：可信度分层 + 四路召回 + rerank 精排 + 按记忆量自动分档，web 与 desktop 共用一份 SQLite",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "memory",
+    "long-term-memory",
+    "sqlite",
+    "rerank",
+    "rag"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "scripts",
+    "cordis.patch.yml",
+    "README.md",
+    "INSTALL_AGENT.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.0-rc.2 <0.3.0-0"
+  },
+  "scripts": {
+    "check": "node scripts/check-syntax.js",
+    "selftest": "node scripts/selftest.js",
+    "eval": "node scripts/retrieval-eval.js",
+    "scale-bench": "node scripts/scale-bench.js",
+    "import:memos": "node scripts/import-memos.js"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/dsh-agent": ">=0.2.0-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-llm": ">=0.2.0-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-skill": ">=0.2.0-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-tools": ">=0.2.0-rc.2 <0.3.0-0",
+    "@deepseek-ai/schemastery": "^3.0.0"
+  },
+  "license": "MIT"
+}
