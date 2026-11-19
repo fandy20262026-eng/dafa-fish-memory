@@ -33,8 +33,16 @@ console.log(`\n[1] 配置解析`)
   check('${FOO} 被展开', expanded.value === 'bar')
   const missing = interpolateEnv('${NOPE}', {})
   check('缺失变量被记录', missing.missing.length === 1 && missing.missing[0] === 'NOPE')
-  check('Pro/ 被识别为付费档', isPaidModel('Pro/BAAI/bge-m3') === true)
-  check('免费档不被误判', isPaidModel('BAAI/bge-m3') === false)
+
+  // 模型档位不再被插件限制：付费档也应原样保留，不做回退
+  const paidSettings = resolveSettings({
+    home: root,
+    apiKey: 'sk-test',
+    embeddingModel: 'Pro/BAAI/bge-m3',
+    rerankModel: 'Pro/BAAI/bge-reranker-v2-m3',
+  })
+  check('付费档 embedding 不被拒绝', paidSettings.embeddingModel === 'Pro/BAAI/bge-m3')
+  check('付费档 rerank 不被拒绝', paidSettings.rerankModel === 'Pro/BAAI/bge-reranker-v2-m3')
 
   const settings = resolveSettings({
     home: root,
@@ -42,8 +50,8 @@ console.log(`\n[1] 配置解析`)
     embeddingModel: 'Pro/whatever',
     embeddingDim: 1024,
   })
-  check('付费模型被回退', settings.embeddingModel === 'BAAI/bge-m3', settings.embeddingModel)
-  check('付费模型产生告警', settings.problems.some(p => p.includes('付费档')))
+  check('付费模型原样保留', settings.embeddingModel === 'Pro/whatever', settings.embeddingModel)
+  check('不再因付费档产生告警', !settings.problems.some(p => p.includes('付费档')))
   check('存储路径落在 home/memory-sf 下', settings.storagePath === join(root, 'memory-sf', 'memory.db'))
   check('默认按工作区隔离', settings.scopeMode === 'workspace')
 }
